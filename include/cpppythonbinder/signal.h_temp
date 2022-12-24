@@ -1,0 +1,37 @@
+#ifndef __SIGNAL_H__
+#define __SIGNAL_H__
+
+#include "types.h"
+#include "parameter.h"
+#include <string>
+#include <stdint.h>
+#include <vector>
+
+// todo : handle internals as parameters to have access to caps?
+
+class Signal
+{
+public:
+    // default constructor
+    Signal(std::string name, sample_type_t type, int rate, std::vector<int> dims);
+
+    // push data to the delayline
+    Push(void *data, int nels);
+
+    // pull data from the delayline
+    Pull(void *data, int nels);
+
+    // getters
+    std::string GetName() { return this->name; };
+    int GetRate() { return this->rate; };
+    sample_type_t GetType() { return this->type; };
+
+private:
+    std::string name;        // name of the signal
+    sample_type_t type;      // sample data type
+    int ndims;               // number of dimensions
+    int rate;                // sampling rate
+    int8_t *circular_buffer; // todo : implement
+};
+
+#endif

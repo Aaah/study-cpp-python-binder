@@ -79,6 +79,7 @@
         "unordered_set": "cpp",
         "ranges": "cpp",
         "cfenv": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "module.h": "c"
     }
 }

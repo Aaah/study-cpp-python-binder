@@ -28,3 +28,6 @@ add_subdirectory(src)
 
 # The executable code is here
 add_subdirectory(application)
+
+# SWIG for python code bindings
+add_subdirectory(swig)
