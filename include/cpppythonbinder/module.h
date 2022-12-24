@@ -17,12 +17,12 @@ class Module
 {
 
 public:
-    // default constructor
-    Module(Config cfg);
+    // Module(Config cfg);           // default constructor
+    Module(std::string cfg_path); // path to config file
 
     // configuration
     int Configure();
-    int Configure(Config cfg);
+    // int Configure(Config cfg);
 
     // restart (Configure and reset variables)
     int Reset();

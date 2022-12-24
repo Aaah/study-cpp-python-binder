@@ -16,7 +16,7 @@ swig_add_library(pyDSP
 add_library(${PROJECT_NAMESPACE}::pyDSP ALIAS pyDSP)
 
 # todo : replace with variables
-swig_link_libraries(pyDSP ${CPPPYTHONBINDER_LIB} ${PYTHON_LIBRARIES})
+swig_link_libraries(pyDSP cpppythonbinderlib ${PYTHON_LIBRARIES})
 
 # Include directories to look for headers
 target_include_directories(pyDSP

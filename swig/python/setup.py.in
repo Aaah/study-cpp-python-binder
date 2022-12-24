@@ -26,7 +26,7 @@ class CompiledLibInstall(setuptools.command.install.install):
 if __name__ == '__main__':
     setuptools.setup(
         name='pyDSP',
-        version='1.0.0-dev',
+        version='1.0.0.dev0',
         packages=['pyDSP'],
         license='Apache License 2.0',
         author='Rémy VINCENT',

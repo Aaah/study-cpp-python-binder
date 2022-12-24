@@ -31,7 +31,7 @@ target_link_libraries(${CPPPYTHONBINDER_LIB} -lpthread)
 target_include_directories(${CPPPYTHONBINDER_LIB} PUBLIC ../include)
 
 # All users of this library will need at least C++11
-target_compile_options(${CPPPYTHONBINDER_LIB} PRIVATE -std=c++11 -g -Wall -Wformat)
+target_compile_options(${CPPPYTHONBINDER_LIB} PRIVATE -std=c++11 -g -Wall -Wformat -fPIC)
 target_compile_definitions(${CPPPYTHONBINDER_LIB} PRIVATE SPDLOG_COMPILED_LIB)
 
 # IDEs should put the headers in a nice place
