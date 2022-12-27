@@ -14,16 +14,16 @@ class InstallPlatlib(install):
         self.install_lib=self.install_platlib
 
 if __name__ == '__main__':
-        #py_modules=['pyDSP.module','pyDSP.parameter','pyDSP.config'],
 
     setuptools.setup(
-        name='pyDSP',
+        name='pydsp-dist',
         version='0.1.1',
-        py_modules=['pyDSP'],
+        py_modules=['pydsp.core'],
+        packages=setuptools.find_packages(),
         distclass=BinaryDistribution,
         author='Rémy VINCENT',
         author_email='rmy.vincent@gmail.com',
-        package_data={'':['_pyDSP.so']},
+        package_data={'':['_pydsp.so']},
         include_package_data=True,
         cmdclass={'install': InstallPlatlib}
     )
