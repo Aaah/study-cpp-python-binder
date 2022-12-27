@@ -5,18 +5,31 @@ include_directories(${PYTHON_INCLUDE_PATH})
 set(CMAKE_SWIG_FLAGS "")
 
 # Define nature of bindings (from cpp to python)
-set_source_files_properties(../module.i PROPERTIES CPLUSPLUS ON)
+set_source_files_properties(../core.i PROPERTIES CPLUSPLUS ON)
+# set_source_files_properties(../module.i PROPERTIES CPLUSPLUS ON)
+# set_source_files_properties(../parameter.i PROPERTIES CPLUSPLUS ON)
+# set_source_files_properties(../config.i PROPERTIES CPLUSPLUS ON)
+
+set(PYTHON_PROJECT_DIR ${PROJECT_BINARY_DIR}/swig/python/)
 
 # Add swig module
 swig_add_library(pyDSP
     TYPE MODULE
     LANGUAGE python
-    SOURCES ../module.i)
+    SOURCES ../core.i
+    # SOURCES ../module.i ../parameter.i ../config.i
+    # OUTFILE_DIR ${PYTHON_PROJECT_DIR}/wrappers
+    OUTPUT_DIR ${PYTHON_PROJECT_DIR}/pyDSP/
+    )
 
-add_library(${PROJECT_NAMESPACE}::pyDSP ALIAS pyDSP)
+# Define where the .so should be generated
+set_target_properties(pyDSP PROPERTIES LIBRARY_OUTPUT_DIRECTORY ${PYTHON_PROJECT_DIR}/pyDSP/)
 
-# todo : replace with variables
-swig_link_libraries(pyDSP cpppythonbinderlib ${PYTHON_LIBRARIES})
+# Alternative : tells that the so should be copied somewhere
+# set_target_properties(pyDSP PROPERTIES INSTALL_RPATH "$ORIGIN:$ORIGIN/../../${PYTHON_PROJECT}/.libs")
+
+# ??
+# add_library(${PROJECT_NAMESPACE}::pyDSP ALIAS pyDSP)
 
 # Include directories to look for headers
 target_include_directories(pyDSP
@@ -25,18 +38,26 @@ target_include_directories(pyDSP
   ${Python3_INCLUDE_DIRS}
   )
 
+# Contents of target property INCLUDE_DIRECTORIES will be forwarded to SWIG compiler
 set_property(TARGET pyDSP PROPERTY SWIG_USE_TARGET_INCLUDE_DIRECTORIES ON)
 
-# Files to install with Python
-set(PYTHON_INSTALL_FILES ${CMAKE_CURRENT_BINARY_DIR}/pyDSP.py ${CMAKE_CURRENT_BINARY_DIR}/_pyDSP.so)
+# Link library to the Python package
+swig_link_libraries(pyDSP 
+    cpppythonbinderlib 
+    ${PYTHON_LIBRARIES}
+    )
+    
+# Create Python package structure
+# file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/pyDSP/core/__init__.py CONTENT "")
+file(GENERATE OUTPUT ${PYTHON_PROJECT_DIR}/pyDSP/__init__.py CONTENT "")
 
-# Configure setup.py and copy to output directory
+# Configure (using cmake variables) setup.py and copy to output directory
 set(SETUP_PY_IN ${CMAKE_CURRENT_SOURCE_DIR}/setup.py.in)
-set(SETUP_PY_OUT ${CMAKE_CURRENT_BINARY_DIR}/setup.py)
+set(SETUP_PY_OUT ${PYTHON_PROJECT_DIR}/setup.py)
 configure_file(${SETUP_PY_IN} ${SETUP_PY_OUT})
 
-# Install target using generated setup.py
+# New build target : Install Python package using generated setup.py
 add_custom_target(install-python 
-    DEPENDS _pyDSP.so 
-    COMMAND python ${SETUP_PY_OUT} install
+    DEPENDS ${PYTHON_PROJECT_DIR}/pyDSP/_pyDSP.so 
+    COMMAND python ${SETUP_PY_OUT} bdist_wheel
     )

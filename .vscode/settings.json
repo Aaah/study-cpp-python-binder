@@ -80,6 +80,8 @@
         "ranges": "cpp",
         "cfenv": "cpp",
         "valarray": "cpp",
-        "module.h": "c"
+        "module.h": "c",
+        "config.h": "c",
+        "parameter.h": "c"
     }
 }

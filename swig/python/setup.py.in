@@ -1,35 +1,29 @@
 import setuptools.command.install
 import shutil
 from distutils.sysconfig import get_python_lib
+from setuptools.command.install import install
 
+# force setuptools to recognize that this is actually a binary distribution
+class BinaryDistribution(setuptools.dist.Distribution):
+    def has_ext_modules(foo):
+        return True
 
-class CompiledLibInstall(setuptools.command.install.install):
-    """
-    Specialized install to install to python libs
-    """
-
-    def run(self):
-        """
-        Run method called by setup
-        :return:
-        """
-        # Get filenames from CMake variable
-        filenames = '${PYTHON_INSTALL_FILES}'.split(';')
-
-        # Directory to install to
-        install_dir = get_python_lib()
-
-        # Install files
-        [shutil.copy(filename, install_dir) for filename in filenames]
-
+class InstallPlatlib(install):
+    def finalize_options(self):
+        install.finalize_options(self)
+        self.install_lib=self.install_platlib
 
 if __name__ == '__main__':
+        #py_modules=['pyDSP.module','pyDSP.parameter','pyDSP.config'],
+
     setuptools.setup(
         name='pyDSP',
-        version='1.0.0.dev0',
-        packages=['pyDSP'],
-        license='Apache License 2.0',
+        version='0.1.1',
+        py_modules=['pyDSP'],
+        distclass=BinaryDistribution,
         author='Rémy VINCENT',
         author_email='rmy.vincent@gmail.com',
-        cmdclass={'install': CompiledLibInstall}
+        package_data={'':['_pyDSP.so']},
+        include_package_data=True,
+        cmdclass={'install': InstallPlatlib}
     )
