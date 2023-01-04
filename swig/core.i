@@ -5,12 +5,12 @@
 // Add necessary symbols to generated header
 %{
 #define SWIG_FILE_WITH_INIT
-#include "cpppythonbinder/config.h"
-#include "cpppythonbinder/parameter.h"
-#include "cpppythonbinder/module.h"
+#include "cpppythonbinder/core/config.h"
+#include "cpppythonbinder/core/parameter.h"
+#include "cpppythonbinder/core/module.h"
 %}
 
 // Process symbols in header
-%include "cpppythonbinder/config.h"
-%include "cpppythonbinder/parameter.h"
-%include "cpppythonbinder/module.h"
+%include "cpppythonbinder/core/config.h"
+%include "cpppythonbinder/core/parameter.h"
+%include "cpppythonbinder/core/module.h"

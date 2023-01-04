@@ -1,4 +1,4 @@
-#include "cpppythonbinder/config.h"
+#include "cpppythonbinder/core/config.h"
 
 DSPConfig::DSPConfig(void)
 {

@@ -1,6 +1,6 @@
-#include "cpppythonbinder/signal.h"
+#include "cpppythonbinder/core/signal.h"
 
-DSPSignal::DSPSignal(std::string name, sample_type_t type, int rate, std::vector<int> dims)
+DSPSignal::DSPSignal(std::string name, sample_type_t type, int rate, int nchannels, std::vector<int> dims)
 {
     // todo
     return;

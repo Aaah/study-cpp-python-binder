@@ -1,5 +1,5 @@
-#include "cpppythonbinder/module.h"
-#include "cpppythonbinder/config.h"
+#include "cpppythonbinder/core/module.h"
+#include "cpppythonbinder/core/config.h"
 
 DSPModule::DSPModule()
 {

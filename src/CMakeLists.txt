@@ -2,15 +2,16 @@ set(CPPPYTHONBINDER_LIB cpppythonbinderlib)
 
 # find all headers, optional but make them show up in IDEs
 file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CppPythonBinder_SOURCE_DIR}/include/cpppythonbinder/*.h")
+file(GLOB HEADER_LIST CONFIGURE_DEPENDS "${CppPythonBinder_SOURCE_DIR}/include/cpppythonbinder/core/*.h")
 
 # Dependencies
 
 # Make an automatic library - will be static or dynamic based on user setting
 add_library(${CPPPYTHONBINDER_LIB}
-module.cpp
-parameter.cpp
-config.cpp
-signal.cpp
+core/module.cpp
+core/parameter.cpp
+core/config.cpp
+core/signal.cpp
 ${HEADER_LIST})
 
 target_include_directories(${CPPPYTHONBINDER_LIB} PRIVATE 

@@ -1,5 +1,5 @@
-#include "cpppythonbinder/module.h"
-#include "cpppythonbinder/parameter.h"
+#include "cpppythonbinder/core/module.h"
+#include "cpppythonbinder/core/parameter.h"
 
 
 int main(int argc, char **argv)

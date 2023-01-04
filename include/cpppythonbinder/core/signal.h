@@ -1,22 +1,22 @@
-#ifndef __SIGNAL_H__
-#define __SIGNAL_H__
+#ifndef __DSPSIGNAL_H__
+#define __DSPSIGNAL_H__
 
 #include "types.h"
 #include "parameter.h"
+#include "config.h"
 #include <string>
 #include <stdint.h>
 #include <vector>
 
 // todo : handle internals as parameters to have access to caps?
 // todo : count the number of pushes (frames) and dump it as well
-// todo : turn DSPSignal into an interface that cannot be used?
 // todo : state related to real-time? full/...
 
 class DSPSignal
 {
 public:
     // default constructor
-    DSPSignal(std::string name, sample_type_t type, int rate, std::vector<int> dims);
+    DSPSignal(std::string name, sample_type_t type, int rate, int nchannels, std::vector<int> dims);
 
     // push data to the delayline
     int Push(void *data, int nels);
@@ -27,7 +27,8 @@ public:
     // dump to file ?
     int Dump(std::string fname);
 
-    // 
+    // -- attributes
+    DSPConfig cfg; // capabilities
 
     // -- getters
     std::string GetName() { return this->name; };
@@ -37,6 +38,7 @@ public:
 private:
     std::string name;        // name of the signal
     sample_type_t type;      // sample data type
+    int nchannels;           // number of channels
     int ndims;               // number of dimensions
     int rate;                // sampling rate
     int8_t *circular_buffer; // todo : implement
@@ -63,7 +65,7 @@ class DSPSignal1d : public DSPSignal
 {
 public:
     // default constructor (length being defined either in samples or duration sec))
-    // note : the default copy constructor can advantageously create quick duplicates 
+    // note : the default copy constructor can advantageously create quick duplicates
     DSPSignal1d(std::string name, int rate, int nchannels, int nsamples, sample_type_t type);
     DSPSignal1d(std::string name, int rate, int nchannels, float duration, sample_type_t type);
 
