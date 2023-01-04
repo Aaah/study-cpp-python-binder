@@ -5,7 +5,7 @@
 int main(int argc, char **argv)
 {
     // create a module based on this configuration
-    Module mod = Module("assets/config.json");
-    mod.Process();
+    DSPModule mod = DSPModule("assets/config.json");
+    // mod.Process();
 
 }

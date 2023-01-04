@@ -1,36 +1,56 @@
-#ifndef __MODULE_H__
-#define __MODULE_H__
+#ifndef __DSPMODULE_H__
+#define __DSPMODULE_H__
 
-#include <string>
 #include "parameter.h"
 #include "config.h"
+#include "signal.h"
+#include <string>
+#include <vector>
 
 /*
 
-A DSP Module is setup using a Config.
+A DSP DSPModule is setup using a DSPConfig.
 
-The Config contains DSP Parameters.
+The DSPConfig contains DSP Parameters.
 
 */
 
-class Module
+class DSPModule
 {
 
 public:
-    // Module(Config cfg);           // default constructor
-    Module(std::string cfg_path); // path to config file
+    DSPModule();                     // default constructor
+    DSPModule(DSPConfig cfg);        // from cfg object
+    DSPModule(std::string cfg_path); // path to config file
 
     // configuration
-    int Configure();
-    // int Configure(Config cfg);
+    int Configure();                        // configure using the current cfg
+    int Configure(DSPConfig cfg);           // configure from cfg object
+    int Configure(std::string path_to_cfg); // configure from file
 
     // restart (Configure and reset variables)
     int Reset();
 
-    // processing
-    int Process();                      // default (no use without input data?)
-    int Process(float *iovec, int len); // floating-point implementation
-    int Process(int *iovec, int len);   // fixed-point implementation
+    // processing : prototype may change, but all modules need a process method
+
+    // -- internals
+    DSPConfig cfg; // configuration object
 };
 
+class DSPApplication : public DSPModule
+{
+public:
+    // default constructor
+    DSPApplication(DSPConfig cfg);
+    DSPApplication(std::string path_to_cfg);
+
+private:
+    // input pad / signals
+    std::vector<DSPSignal> inputs;
+
+    // output pad / signals
+    std::vector<DSPSignal> outputs;
+
+    // todo : MQTT
+};
 #endif

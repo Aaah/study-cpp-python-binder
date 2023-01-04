@@ -1,29 +1,29 @@
 #include "cpppythonbinder/config.h"
 
-Config::Config(void)
+DSPConfig::DSPConfig(void)
 {
     // todo
 }
 
-int Config::AddParameter(Parameter param)
-{
-    // todo
-    return 0;
-}
-
-int Config::RemoveParameter(const std::string)
+int DSPConfig::AddParameter(DSPParameter param)
 {
     // todo
     return 0;
 }
 
-int Config::Save(void)
+int DSPConfig::RemoveParameter(const std::string)
 {
     // todo
     return 0;
 }
 
-int Config::Load(const std::string)
+int DSPConfig::Save(void)
+{
+    // todo
+    return 0;
+}
+
+int DSPConfig::Load(const std::string)
 {
     // todo
     return 0;

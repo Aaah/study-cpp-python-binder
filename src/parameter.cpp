@@ -2,27 +2,27 @@
 
 // PARAMETER
 
-Parameter::Parameter()
+DSPParameter::DSPParameter()
 {
     return;
 }
 
 // append callback to list
-int Parameter::AddCallback(std::function<int(void)>)
+int DSPParameter::AddCallback(std::function<int(void)>)
 {
     // todo
     return 0;
 }
 
 // remove callback from list
-int Parameter::RemoveCallback(std::function<int(void)>)
+int DSPParameter::RemoveCallback(std::function<int(void)>)
 {
     // todo
     return 0;
 }
 
 // execute the callbacks in the list
-int Parameter::OnValueChange(void)
+int DSPParameter::OnValueChange(void)
 {
     // todo
     return 0;

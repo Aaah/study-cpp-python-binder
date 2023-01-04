@@ -5,11 +5,11 @@
 #include <list>
 #include <functional>
 
-class Parameter
+class DSPParameter
 {
 public:
     // default constructor
-    Parameter();
+    DSPParameter();
 
     // append callback to list
     int AddCallback(std::function<int(void)>);
@@ -32,7 +32,7 @@ private:
     std::list<std::function<int(void)>> callbacks;
 };
 
-class ParameterRanged : public Parameter
+class ParameterRanged : public DSPParameter
 {
 public:
     ParameterRanged();
@@ -40,7 +40,7 @@ public:
 private:
 };
 
-class ParameterSet : public Parameter
+class ParameterSet : public DSPParameter
 {
 public:
     ParameterSet();
@@ -48,7 +48,7 @@ public:
 private:
 };
 
-class ParameterBool : public Parameter
+class ParameterBool : public DSPParameter
 {
 
 public:

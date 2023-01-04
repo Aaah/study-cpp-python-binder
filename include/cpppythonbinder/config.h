@@ -1,17 +1,18 @@
 #ifndef __CONFIG_H__
 #define __CONFIG_H__
 
+#include <vector>
 #include "parameter.h"
 
-class Config
+class DSPConfig
 {
 
 public:
     // default constructor
-    Config();
+    DSPConfig();
 
     // add a parameter to the list
-    int AddParameter(const Parameter param);
+    int AddParameter(const DSPParameter param);
 
     // remove a parameter by its name
     int RemoveParameter(const std::string);
@@ -23,6 +24,7 @@ public:
     int Load(const std::string);
 
 private:
+    std::vector<DSPParameter> parameters;
 };
 
 #endif

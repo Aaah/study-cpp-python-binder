@@ -10,7 +10,7 @@ add_library(${CPPPYTHONBINDER_LIB}
 module.cpp
 parameter.cpp
 config.cpp
-# signal.cpp
+signal.cpp
 ${HEADER_LIST})
 
 target_include_directories(${CPPPYTHONBINDER_LIB} PRIVATE 
